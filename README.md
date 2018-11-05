@@ -130,6 +130,12 @@ The following table shows all the current configuration options and their defaul
 </tr>
 
 <tr>
+<td><b>allow_route_only_once</b></td>
+<td>If a route/action has more than one method(like, PUT and PATCH), only one API will be generated</td>
+<td>false</td>
+</tr>
+
+<tr>
 <td><b>camelize_model_properties</b></td>
 <td>Camelizes property names of models. For example, a property name called first_name would be converted to firstName.</td>
 <td>true</td>
