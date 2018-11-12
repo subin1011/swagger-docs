@@ -1,6 +1,6 @@
 # Swagger::Docs
 
-Generates swagger-ui json files for rails apps with APIs. You add the swagger DSL to your controller classes and then run one rake task to generate the json files.
+Refer https://github.com/richhollis/swagger-docs for the original source of swagger-docs.
 
 [![Gem Version](https://badge.fury.io/rb/swagger-docs.svg)][gem]
 [![Dependency Status](https://gemnasium.com/richhollis/swagger-docs.svg?travis)][gemnasium]
@@ -9,6 +9,37 @@ Generates swagger-ui json files for rails apps with APIs. You add the swagger DS
 [travis]: http://travis-ci.org/richhollis/swagger-docs
 [gemnasium]: https://gemnasium.com/richhollis/swagger-docs
 [coveralls]: https://coveralls.io/r/richhollis/swagger-docs
+
+## Specific Changes
+
+It is same as swagger-docs except the following changes
+
+## 1. New config :allow_route_only_once
+
+This config is false by default. If a particular Rails controller action is mapped to multiple http methods then a operation for each method will be generated. This however can be limited to first http method from the route by setting allow_route_only_once: true
+
+For example, consider the below routes
+
+```ruby
+put 'some_action', on: :collection
+patch 'some_action', on: :collection
+```
+
+Then the below swagger_api method will generate two operations(for PUT and PATCH) in swagger UI
+```ruby
+swagger_api :some_action do
+end
+```
+
+## 2. Handling via multiple methods
+
+Consider the below routes
+
+```ruby
+match 'some_action', via: [:get, :post], on: :collection
+```
+
+Then the swagger_api will generate one operation for the last http method in via array (POST in this case).
 
 ## Swagger Version Specification Support
 
