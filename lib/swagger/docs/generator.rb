@@ -194,7 +194,7 @@ module Swagger
           operation[:parameters] = filter_path_params(api_path, operation[:parameters]) if operation[:parameters]
           operations = verbs.collect{|verb|
             op = operation.dup
-            op[:method] = verb
+            op[:method] = verb.to_s.split('|').last.to_sym
             op
           }
           apis << {:path => api_path, :operations => operations}
